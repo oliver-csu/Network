@@ -17,7 +17,7 @@ public class AioServerReadHandler implements CompletionHandler<Integer, ByteBuff
 
     @Override
     public void completed(Integer result, ByteBuffer attachment) {
-        // 如果条件成立，说明客户端主动终止了TCP套接字，这时服务端终止就可以了
+        // 如果条件成立，说明客户端主动终止了TCP套接字，这时服务端就可以终止了
         if(result == -1) {
             try {
                 asynchronousSocketChannel.close();

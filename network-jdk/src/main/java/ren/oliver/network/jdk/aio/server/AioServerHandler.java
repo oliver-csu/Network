@@ -13,12 +13,12 @@ public class AioServerHandler implements Runnable {
     // 避免程序被关停
     public CountDownLatch countDownLatch;
 
-    public AioServerHandler(int port) {
+    public AioServerHandler(String host, int port) {
         try {
             // 创建服务端通道
             serverAsynchronousServerSocketChannel = AsynchronousServerSocketChannel.open();
             // 绑定端口
-            serverAsynchronousServerSocketChannel.bind(new InetSocketAddress(port));
+            serverAsynchronousServerSocketChannel.bind(new InetSocketAddress(host, port));
             System.out.println("服务端启动成功");
         } catch (IOException e) {
             e.printStackTrace();

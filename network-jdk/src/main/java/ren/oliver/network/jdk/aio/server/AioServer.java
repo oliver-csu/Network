@@ -1,6 +1,7 @@
 package ren.oliver.network.jdk.aio.server;
 
 import static ren.oliver.network.jdk.bio.Constant.DEFAULT_PORT;
+import static ren.oliver.network.jdk.bio.Constant.DEFAULT_SERVER_IP;
 
 public class AioServer {
 
@@ -13,7 +14,7 @@ public class AioServer {
     public static void main(String[] args) {
         if(aioServerHandler!=null)
             return;
-        aioServerHandler = new AioServerHandler(DEFAULT_PORT);
+        aioServerHandler = new AioServerHandler(DEFAULT_SERVER_IP, DEFAULT_PORT);
         new Thread(aioServerHandler, "Server").start();
     }
 

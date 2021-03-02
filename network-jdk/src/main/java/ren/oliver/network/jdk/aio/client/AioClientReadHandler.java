@@ -21,10 +21,10 @@ public class AioClientReadHandler implements CompletionHandler<Integer, ByteBuff
     }
 
     @Override
-    public void completed(Integer result, ByteBuffer attachment) {
-        attachment.flip();
-        byte[] bytes = new byte[attachment.remaining()];
-        attachment.get(bytes);
+    public void completed(Integer result, ByteBuffer byteBuffer) {
+        byteBuffer.flip();
+        byte[] bytes = new byte[byteBuffer.remaining()];
+        byteBuffer.get(bytes);
         String msg;
         try {
             msg = new String(bytes,"UTF-8");
@@ -35,7 +35,7 @@ public class AioClientReadHandler implements CompletionHandler<Integer, ByteBuff
     }
 
     @Override
-    public void failed(Throwable exc, ByteBuffer attachment) {
+    public void failed(Throwable exc, ByteBuffer byteBuffer) {
         System.err.println("数据读取失败");
         exc.printStackTrace();
         try {

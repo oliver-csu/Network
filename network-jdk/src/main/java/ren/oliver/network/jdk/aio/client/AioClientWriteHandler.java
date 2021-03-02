@@ -19,10 +19,10 @@ public class AioClientWriteHandler implements CompletionHandler<Integer, ByteBuf
     }
 
     @Override
-    public void completed(Integer result, ByteBuffer attachment) {
+    public void completed(Integer result, ByteBuffer byteBuffer) {
         // 有可能无法一次性将数据写完，需要检查缓冲区中是否还有数据需要继续进行网络写
-        if(attachment.hasRemaining()){
-            clientAsynchronousSocketChannel.write(attachment, attachment,this);
+        if(byteBuffer.hasRemaining()){
+            clientAsynchronousSocketChannel.write(byteBuffer, byteBuffer,this);
         }else{
             // 写操作已经完成，为读取服务端传回的数据建立缓冲区
             ByteBuffer readBuffer = ByteBuffer.allocate(1024);
@@ -32,7 +32,7 @@ public class AioClientWriteHandler implements CompletionHandler<Integer, ByteBuf
     }
 
     @Override
-    public void failed(Throwable exc, ByteBuffer attachment) {
+    public void failed(Throwable exc, ByteBuffer byteBuffer) {
         System.err.println("数据发送失败");
         exc.printStackTrace();
         try {

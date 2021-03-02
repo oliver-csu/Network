@@ -37,7 +37,7 @@ public class AioClientHandler implements CompletionHandler<Void,AioClientHandler
         // 创建CountDownLatch，因为是异步调用，下面的connect不会阻塞，那么整个run方法会迅速结束，那么负责网络通讯的线程也会迅速结束
         latch = new CountDownLatch(1);
         // 发起异步连接操作，回调参数就是这个实例本身，如果连接成功会回调这个实例的completed方法
-        clientAsynchronousSocketChannel.connect(new InetSocketAddress(host,port), null,this);
+        clientAsynchronousSocketChannel.connect(new InetSocketAddress(host, port), null,this);
         try {
             latch.await();
             clientAsynchronousSocketChannel.close();
