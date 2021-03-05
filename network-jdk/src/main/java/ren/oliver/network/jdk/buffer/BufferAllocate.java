@@ -6,29 +6,40 @@ import java.nio.ByteBuffer;
 public class BufferAllocate {
 
     public static void main(String[] args) {
-        System.out.println("----------Test allocate--------");
-        System.out.println("before alocate:"
-                + Runtime.getRuntime().freeMemory());
-
         // 堆上分配
-        ByteBuffer buffer = ByteBuffer.allocate(1024000);
-        System.out.println("buffer = " + buffer);
-        System.out.println("after alocate:"
-                + Runtime.getRuntime().freeMemory());
+        alocateTest();
 
         // 直接内存
+        allocateDirectTest();
+
+        // 测试wrap方法
+        wrapTest();
+    }
+
+    // 堆上分配
+    public static void alocateTest() {
+        System.out.println("before alocate:" + Runtime.getRuntime().freeMemory());
+        ByteBuffer buffer = ByteBuffer.allocate(1024000);
+        System.out.println("buffer = " + buffer);
+        System.out.println("after alocate:" + Runtime.getRuntime().freeMemory());
+    }
+
+    // 直接内存
+    public static void allocateDirectTest() {
+        System.out.println("before allocateDirect:" + Runtime.getRuntime().freeMemory());
         ByteBuffer directBuffer = ByteBuffer.allocateDirect(102400);
         System.out.println("directBuffer = " + directBuffer);
-        System.out.println("after direct alocate:"
-                + Runtime.getRuntime().freeMemory());
+        System.out.println("after allocateDirect:" + Runtime.getRuntime().freeMemory());
+    }
 
-        System.out.println("----------Test wrap--------");
+    // 测试wrap方法
+    public static void wrapTest() {
         byte[] bytes = new byte[32];
-        buffer = ByteBuffer.wrap(bytes);
-        System.out.println(buffer);
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
+        System.out.println("only wrap: " + buffer);
 
         buffer = ByteBuffer.wrap(bytes, 10, 10);
-        System.out.println(buffer);
+        System.out.println("wrap offset+length: " + buffer);
     }
 
 }
