@@ -106,40 +106,48 @@ public class BufferMethod {
         byteBuffer = ByteBuffer.allocate(20);
         System.out.println("byteBuffer = " + byteBuffer);
         byteBuffer.clear();
-        byteBuffer.position(5);//移动position到5
-        byteBuffer.mark();//记录当前position的位置
-        byteBuffer.position(10);//移动position到10
+        // 移动position到5
+        byteBuffer.position(5);
+        // 记录当前position的位置
+        byteBuffer.mark();
+        // 移动position到10
+        byteBuffer.position(10);
         System.out.println("before reset:" + byteBuffer);
-        byteBuffer.reset();//复位position到记录的地址
+        // 复位position到记录的地址
+        byteBuffer.reset();
         System.out.println("after reset:" + byteBuffer);
     }
 
     public static void rewindTest(ByteBuffer byteBuffer) {
         System.out.println("--------Test rewind--------");
         byteBuffer.clear();
-        byteBuffer.position(10);//移动position到10
-        byteBuffer.limit(15);//限定最大可写入的位置为15
+        // 移动position到10
+        byteBuffer.position(10);
+        // 限定最大可写入的位置为15
+        byteBuffer.limit(15);
         System.out.println("before rewind:" + byteBuffer);
-        byteBuffer.rewind();//将position设回0
+        // 将position设回0
+        byteBuffer.rewind();
         System.out.println("before rewind:" + byteBuffer);
     }
 
     public static void compactTest(ByteBuffer byteBuffer) {
         System.out.println("--------Test compact--------");
         byteBuffer.clear();
-        //放入4个字节，position移动到下个可写入的位置，也就是4
+        // 放入4个字节，position移动到下个可写入的位置，也就是4
         byteBuffer.put("abcd".getBytes());
         System.out.println("before compact:" + byteBuffer);
         System.out.println(new String(byteBuffer.array()));
-        byteBuffer.flip();//将position设回0，并将limit设置成之前position的值
+        // 将position设回0，并将limit设置成之前position的值
+        byteBuffer.flip();
         System.out.println("after flip:" + byteBuffer);
-        //从Buffer中读取数据的例子，每读一次，position移动一次
+        // 从Buffer中读取数据的例子，每读一次，position移动一次
         System.out.println((char) byteBuffer.get());
         System.out.println((char) byteBuffer.get());
         System.out.println((char) byteBuffer.get());
         System.out.println("after three gets:" + byteBuffer);
         System.out.println(new String(byteBuffer.array()));
-        //compact()方法将所有未读的数据拷贝到Buffer起始处。
+        // compact()方法将所有未读的数据拷贝到Buffer起始处。
         // 然后将position设到最后一个未读元素正后面。
         byteBuffer.compact();
         System.out.println("after compact:" + byteBuffer);
