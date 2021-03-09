@@ -4,18 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ren.oliver</groupId>
-    <artifactId>network-parent</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <parent>
+        <groupId>ren.oliver</groupId>
+        <artifactId>network-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-    <modules>
-        <module>network-jdk</module>
-        <module>network-netty</module>
-    </modules>
+    <artifactId>network-netty</artifactId>
 
-    <dependencyManagement>
+    <dependencies>
 
-    </dependencyManagement>
+    </dependencies>
 
 </project>
